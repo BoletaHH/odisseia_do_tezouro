@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#06120C">
+<meta name="theme-color" content="#0A2240">
 <meta name="description" content="Caça ao tesouro da Tia Sónia.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13,7 +13,6 @@
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <style>
-/* base: o mesmo arranque que a app tinha no claude.ai */
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
 img{max-width:100%}
@@ -87,13 +86,13 @@ img{display:block;max-width:100%}
 .capa{justify-content:center;text-align:center}
 .capa::before{
   content:"";position:fixed;inset:0;z-index:-1;
-  background:radial-gradient(85% 55% at 50% 26%,rgba(245,194,66,.18),transparent 68%),
-             radial-gradient(70% 50% at 50% 100%,rgba(63,178,74,.14),transparent 70%);
+  background:radial-gradient(85% 55% at 50% 24%,rgba(245,194,66,.22),transparent 68%),
+             radial-gradient(75% 50% at 50% 100%,rgba(10,34,64,.6),transparent 70%);
 }
 .capa h1{margin:0}
 .capa-logo{
-  width:min(92%,420px);margin:0 auto;
-  filter:drop-shadow(0 16px 34px rgba(0,0,0,.55));
+  width:min(100%,560px);margin:0 auto;
+  filter:drop-shadow(0 18px 38px rgba(0,0,0,.6));
 }
 .capa-sub{
   font-family:var(--font-display);
@@ -251,6 +250,74 @@ img{display:block;max-width:100%}
   padding:26px 18px;
   margin:0 0 30px;
 }
+/* fotografias a comparar, dentro da adivinha */
+.linha-fotos{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px}
+.linha-fotos .btn{flex:1 1 140px;width:auto;min-width:0;font-size:1.5rem;padding:18px 16px}
+/* passos numerados de uma adivinha */
+.passos{
+  margin:0 0 24px;padding:20px 18px 20px 42px;
+  background:rgba(0,0,0,.08);
+  border:2px solid rgba(185,154,98,.6);
+  border-radius:12px;
+  display:flex;flex-direction:column;gap:14px;
+  counter-reset:passo;
+}
+.passos li{
+  font-family:var(--font-titulo);font-weight:700;
+  font-size:1.02rem;line-height:1.4;color:var(--tinta);
+}
+.passos li::marker{color:var(--vermelho);font-weight:800}
+/* código a decifrar */
+.codigo{
+  margin:-6px 0 22px;
+  font-family:"Ubuntu Mono","SFMono-Regular",Menlo,monospace;
+  font-size:clamp(2.4rem,11vw,3.4rem);
+  font-weight:700;letter-spacing:.22em;
+  text-align:center;color:var(--vermelho);
+  text-shadow:0 2px 0 rgba(0,0,0,.15);
+  word-break:break-word;
+}
+/* código comprido, como uma mensagem em Morse */
+.codigo.longo{
+  font-size:clamp(1.25rem,5.5vw,1.7rem);
+  letter-spacing:.1em;line-height:1.9;
+  word-spacing:.3em;
+  padding:18px 14px;
+  background:rgba(0,0,0,.08);
+  border:2px solid rgba(185,154,98,.6);
+  border-radius:12px;
+  overflow-wrap:anywhere;
+}
+/* instrução de resolução */
+.instrucao{
+  margin:0 0 26px;
+  padding:16px 18px;
+  background:rgba(184,134,11,.14);
+  border:1px dashed var(--ouro-fundo);
+  border-radius:12px;
+  font-family:var(--font-titulo);font-weight:700;
+  font-size:1.02rem;line-height:1.45;
+  color:var(--tinta);text-align:center;
+}
+/* mensagem num pergaminho, dentro da caixa da adivinha */
+.pergaminho{
+  margin:0 0 28px;
+  padding:24px 22px;
+  background:
+    radial-gradient(120% 60% at 20% 0%,rgba(255,255,255,.5),transparent 60%),
+    linear-gradient(165deg,#F0DFB4,#DFC894);
+  border:2px solid #B99A62;
+  border-radius:4px;
+  box-shadow:inset 0 0 40px rgba(150,110,50,.25),0 8px 18px rgba(0,0,0,.25);
+  font-family:var(--font-enigma);
+  font-size:clamp(1.2rem,5vw,1.5rem);
+  line-height:1.5;color:var(--tinta);
+}
+.pergaminho p{margin:0}
+.pergaminho cite{
+  display:block;margin-top:14px;text-align:right;
+  font-style:normal;font-size:.95rem;color:#8A6B3A;
+}
 .campo{display:flex;flex-direction:column;gap:14px}
 .campo label{
   font-family:var(--font-display);font-weight:400;
@@ -350,6 +417,93 @@ img{display:block;max-width:100%}
 
 /* ============ páginas de blocos (nível 0) ============ */
 .lista-blocos{display:flex;flex-direction:column;gap:22px}
+.lista-blocos .nivel-cabecalho{margin-bottom:4px}
+.lista-blocos .instalar{gap:18px}
+.lista-blocos .painel{margin-top:0}
+.lista-blocos .pista{margin-top:26px}
+.lista-blocos .palco-papagaio{margin:6px 0 -6px}
+.lista-blocos .balao{margin-top:0}
+/* cena de fala: o Bacalhau à esquerda, os balões à direita */
+.cena-fala{display:flex;align-items:flex-start;gap:12px;min-width:0}
+.retrato{flex:0 0 76px;width:76px;position:sticky;top:12px}
+.retrato img{
+  width:100%;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.5));
+  animation:baloicar 4.5s ease-in-out infinite;
+}
+.grupo-falas{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:14px}
+/* o bico do balão passa para o lado esquerdo, a apontar ao papagaio */
+.cena-fala .balao{margin-top:0}
+.quem-fala{font-weight:700;color:var(--vermelho);letter-spacing:.02em}
+.cena-fala .balao::before,
+.cena-fala .balao::after{
+  top:22px;left:-18px;
+  border-bottom-color:transparent;
+  border-right-color:var(--verde);
+}
+.cena-fala .balao::after{left:-12px;border-right-color:#FFFDF6}
+.cena-fala .balao:not(:first-child)::before,
+.cena-fala .balao:not(:first-child)::after{display:none}
+@media (max-width:420px){
+  .retrato{flex-basis:60px;width:60px}
+  .cena-fala{gap:10px}
+}
+/* imagem de cena */
+.moldura{
+  margin:0;padding:0;
+  display:flex;flex-direction:column;gap:10px;align-items:center;
+}
+.moldura img{
+  width:100%;border-radius:8px;
+  filter:drop-shadow(0 16px 32px rgba(0,0,0,.55));
+}
+.moldura figcaption{
+  font-family:var(--font-titulo);font-weight:700;
+  font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ouro);text-align:center;
+}
+/* explicação de cena */
+.texto-cena{
+  margin:0;
+  font-size:1.2rem;line-height:1.55;
+  color:var(--fg-mute);text-align:center;text-wrap:balance;
+}
+.texto-cena.esquerda{
+  text-align:left;text-wrap:pretty;
+  color:var(--fg);
+  border-left:3px solid var(--ouro);
+  padding-left:16px;
+}
+/* botão do bilhete */
+.btn-bilhete{
+  background:linear-gradient(180deg,#FDF2D4,#D8C08A);
+  color:var(--tinta);
+  box-shadow:0 6px 0 #9E8A64,0 14px 26px rgba(0,0,0,.4);
+}
+.btn-bilhete:active{box-shadow:0 2px 0 #9E8A64,0 8px 16px rgba(0,0,0,.4)}
+/* visor de bilhete em ecrã cheio */
+.visor{
+  position:fixed;inset:0;z-index:70;
+  background:rgba(3,10,20,.94);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  padding:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px));
+  padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  animation:surge .2s ease-out;
+}
+.visor img{
+  max-width:100%;max-height:72vh;
+  object-fit:contain;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.6));
+}
+.visor-fechar{width:auto;min-width:200px;flex:0 0 auto}
+/* linha do botão de responder e do avançar */
+.linha-acoes{display:flex;flex-wrap:wrap;gap:12px}
+.linha-acoes .btn{flex:1 1 180px;width:auto;min-width:0}
+.btn-seguir{
+  background:linear-gradient(180deg,#5FD76B,#2E8B38);
+  color:#042D0C;box-shadow:0 6px 0 #1C5B23,0 14px 26px rgba(0,0,0,.4);
+}
+.btn-seguir:active{box-shadow:0 2px 0 #1C5B23,0 8px 16px rgba(0,0,0,.4)}
 .caixa{
   background:rgba(255,255,255,.05);
   border:2px solid rgba(245,194,66,.32);
@@ -359,7 +513,40 @@ img{display:block;max-width:100%}
 .caixa.resolvida{border-color:var(--verde);background:rgba(63,178,74,.1)}
 .caixa h3{
   font-family:var(--font-corpo);font-weight:700;
-  font-size:1.2rem;line-height:1.4;margin:0 0 16px;color:var(--fg);
+  font-size:1.25rem;line-height:1.45;margin:0 0 16px;color:var(--fg);
+  white-space:pre-line;
+}
+.caixa .numero{
+  display:inline-block;
+  font-family:var(--font-display);font-size:1.25rem;
+  letter-spacing:.04em;color:var(--ouro);
+  margin-bottom:6px;
+}
+/* dados auxiliares (coordenadas, tabelas de pista) */
+.caixa .dados{
+  background:rgba(0,0,0,.3);
+  border:1px dashed rgba(245,194,66,.45);
+  border-radius:12px;
+  padding:16px 18px;margin:0 0 18px;
+}
+.caixa .dados h4{
+  font-family:var(--font-titulo);font-weight:700;
+  font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ouro);margin:0 0 10px;
+}
+.caixa .dados ul{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:6px 14px;
+}
+.caixa .dados li{
+  font-family:"Ubuntu Mono","SFMono-Regular",Menlo,monospace;
+  font-size:1.05rem;color:var(--fg);
+  font-variant-numeric:tabular-nums;
+}
+.opcoes.grelha-op{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.opcoes.grelha-op .btn-op{
+  width:100%;padding:16px 4px;font-size:1.3rem;
+  font-family:var(--font-titulo);font-weight:800;
 }
 .caixa .marca{
   float:right;margin-left:12px;color:var(--verde);font-weight:700;font-size:1.3rem;
@@ -429,6 +616,11 @@ img{display:block;max-width:100%}
   </form>
 </div>
 
+<div class="visor" id="visor" hidden role="dialog" aria-modal="true" aria-label="Bilhete">
+  <img id="visor-imagem" alt="">
+  <button type="button" class="btn btn-vermelho visor-fechar" id="visor-fechar">Fechar</button>
+</div>
+
 <script>
 /* =====================================================================
    DADOS DO JOGO — os níveis são dados, não código.
@@ -438,11 +630,13 @@ const JOGO = {
   titulo: "Tia Sónia e a Odisseia do Tezouro",
   subtitulo: "Bem vindos ao jogo do Gonçalo, preparem-se",
   logo: "assets/logo.webp",
+  /* o Bacalhau aparece ao lado de todas as falas */
+  papagaio: "assets/bacalhau.webp",
   /* saudação ao abrir a app, quando já há um nome guardado ({nome} = nome do jogador) */
   regresso: { emblema:"🏴‍☠️", texto:"Bem vindo de volta, {nome}", botao:"Continuar" },
   paginas: [
     {
-      id: "00", tipo: "capa", tema: "consola", rotulo: "Início",
+      id: "00", tipo: "capa", tema: "piratas", rotulo: "Início",
       botoes: [
         { texto: "Nível 0", destino: "00_01", destaque: true },
         {
@@ -460,11 +654,15 @@ const JOGO = {
       ]
     },
     {
-      id: "00_01", tipo: "blocos", tema: "consola", rotulo: "Nível 0 P.1",
+      id: "00_01", tipo: "blocos", tema: "piratas", rotulo: "Nível 0 P.1",
       blocos: [
-        { tipo:"nome", id:"nome", pergunta:"Como te chamas jogador?", marcador:"O teu nome", botao:"guardar_",
-          sucesso:{ emblema:"🏴‍☠️", tipo:"certo", texto:"Bem vindo, {nome}", botao:"Continuar" },
-          erro:{ texto:"Nome não aceite", botao:"Voltar a escrever" } },
+        { tipo:"cabecalho", titulo:"Antes de Zarpar!",
+          fita:"Nível 0 — treino de tripulação" },
+
+        { tipo:"reset", botao:"reset_",
+          confirmacao:{ emblema:"⚠️", texto:"Isto apaga tudo o que a app guardou neste telemóvel e volta ao início. Tens a certeza?",
+                        botao:"Confirmar", cancelar:"Cancelar" },
+          feito:{ emblema:"🧹", texto:"Dados apagados. A app voltou ao início.", botao:"Continuar" } },
 
         { tipo:"instalar", titulo:"Instalar a app no telemóvel",
           sistemas:[
@@ -482,81 +680,333 @@ const JOGO = {
             ]}
           ]},
 
-        { tipo:"aviso", texto:"As respostas devem ser escritas sem acentos e sem maiúsculas" },
+        { tipo:"botoes", id:"adv1", n:1, pergunta:"O Gonçalo é fixe ou muito fixe?",
+          opcoes:["fixe","muito fixe"], respostas:["muito fixe"] },
 
-        { tipo:"escolha", id:"fixe", pergunta:"O gonçalo é fixe ou muito fixe?",
-          opcoes:[
-            { texto:"fixe", certa:false, popup:{ emblema:"⚓", tipo:"errado",
-              texto:"ERRADO! acho que o teu dedo escorregou, era mais ao lado", botao:"Continuar" } },
-            { texto:"muito fixe", certa:true, popup:{ emblema:"🏴‍☠️", tipo:"certo",
-              texto:"Parabéns, está correto", botao:"Continuar" } }
-          ]},
+        { tipo:"botoes", id:"adv2", n:2, pergunta:"De 0 a 10, quão fixe é o Gonçalo?",
+          opcoes:["0","1","2","3","4","5","6","7","8","9","10"], respostas:["10"], grelha:true },
 
-        { tipo:"escala", id:"escala", pergunta:"De 0 a 10 o quão fixe é o gonçalo?", botao:"responder",
-          perguntaLonga:"De 0 a 10, o quão fixe é o gonçalo?", certo:"10",
-          acerto:{ emblema:"🏴‍☠️", tipo:"certo", texto:"Parabéns, acertaste", botao:"Continuar" },
-          falha:{ emblema:"⚓", tipo:"errado", texto:"Errado", botao:"Repetir" } },
+        { tipo:"botoes", id:"adv3", n:3, pergunta:"Quem te dera ser como o Gonçalo",
+          opcoes:["verdadeiro","falso"], respostas:["verdadeiro"] },
 
-        { tipo:"vf", id:"vf", pergunta:"Quem te dera ser como o gonçalo? (Verdade ou Falso)", botao:"responder",
-          verdadeiro:"verdadeiro", falso:"falso" },
+        { tipo:"botoes", id:"adv4", n:4, pergunta:"O Gonçalo é o mais forte da família?",
+          opcoes:["verdadeiro","falso"], respostas:["verdadeiro"] },
 
-        { tipo:"obvio", id:"forte", pergunta:"O gonçalo é o mais forte da família?", botao:"ÓBVIAMENTE...",
-          popup:{ emblema:"💪", tipo:"certo", texto:"Estás correto", botao:"Continuar" } },
+        { tipo:"botoes", id:"adv5", n:5, pergunta:"O Gonçalo é mesmo incrível!",
+          opcoes:["obviamente"], respostas:["obviamente"] },
 
-        { tipo:"afirmacao", id:"incrivel", pergunta:"O gonçalo é mesmo incrível!", marcador:"Escreve aqui", botao:"responder",
-          popup:{ emblema:"🏴‍☠️", tipo:"", texto:"Não era uma pergunta… Era uma afirmação e um facto…", botao:"Continuar" } },
+        { tipo:"botoes", id:"adv6", n:6, pergunta:"O Bacalhau é uma ave ou um peixe?",
+          opcoes:["ave","peixe"], respostas:["ave"] },
 
-        { tipo:"titulo", texto:"Agora para treinarem de verdade" },
+        { tipo:"botoes", id:"adv7", n:7, pergunta:"Em que mês começa o jogo a sério?",
+          opcoes:["outubro","novembro","dezembro"], respostas:["novembro"] },
 
-        { tipo:"adivinha", id:"a1", pergunta:"O que é que tem pescoço mas não tem cabeça?", respostas:["garrafa"] },
-        { tipo:"adivinha", id:"a2", pergunta:"O que é que quanto mais se tira, maior fica?", respostas:["buraco"] },
-        { tipo:"adivinha", id:"a3", pergunta:"Tenho cidades mas não casas, rios mas não água. O que sou?", respostas:["mapa"] },
-        { tipo:"adivinha", id:"a4", pergunta:"Qual é a palavra que se escreve sempre mal?", respostas:["mal"] },
-        { tipo:"adivinha", id:"a5", pergunta:"Quantos meses do ano têm 28 dias?", respostas:["todos"] },
-        { tipo:"adivinha", id:"a6", pergunta:"Cifra de César: ILAH", respostas:["fixe"] },
+        { tipo:"adivinha", id:"adv8", n:8,
+          pergunta:"Navego sem pernas, flutuo sem asas. Levo piratas por cima das ondas. O que sou?",
+          respostas:["barco","navio"] },
 
-        { tipo:"reset", botao:"reset_",
-          confirmacao:{ emblema:"⚠️", texto:"Isto apaga tudo o que a app guardou neste telemóvel e volta ao início. Tens a certeza?",
-                        botao:"Confirmar", cancelar:"Cancelar" },
-          feito:{ emblema:"🧹", texto:"Dados apagados. A app voltou ao início.", botao:"Continuar" } }
+        { tipo:"adivinha", id:"adv9", n:9,
+          pergunta:"Quanto mais tiras de mim, maior eu fico. O que sou?",
+          respostas:["buraco"] },
+
+        { tipo:"adivinha", id:"adv10", n:10,
+          pergunta:"Tenho coroa mas não sou rei. Tenho escamas mas não sou peixe. O que sou?",
+          respostas:["ananas","abacaxi"] },
+
+        { tipo:"adivinha", id:"adv11", n:11,
+          pergunta:"O pai do Pedro tem 3 filhos: Tico, Teco e…?",
+          respostas:["pedro"] },
+
+        { tipo:"adivinha", id:"adv12", n:12,
+          pergunta:"Cifra de César: cada letra anda 2 casas para a frente (A vira C).\nDecifra: YLAMPY",
+          respostas:["ancora"] },
+
+        { tipo:"adivinha", id:"adv13", n:13,
+          pergunta:"Cifra de César: cada letra anda 3 casas para trás (D vira A).\nDecifra: JHQLDO",
+          respostas:["genial"] },
+
+        { tipo:"adivinha", id:"adv14", n:14,
+          pergunta:"Teclado antigo: cada letra carrega-se várias vezes.\nDecifra: 444 555 44 2",
+          respostas:["ilha"] },
+
+        { tipo:"adivinha", id:"adv15", n:15,
+          pergunta:"Teclado antigo.\nDecifra: 555 33 6 33",
+          respostas:["leme"] },
+
+        { tipo:"adivinha", id:"adv16", n:16,
+          pergunta:"Teclado antigo.\nDecifra: 666 88 777 666",
+          respostas:["ouro"] },
+
+        { tipo:"adivinha", id:"adv17", n:17,
+          pergunta:"Anagrama: põe as letras em ordem.\nATRAPI",
+          respostas:["pirata"] },
+
+        { tipo:"adivinha", id:"adv18", n:18,
+          pergunta:"Anagrama: põe as letras em ordem.\nDAPESA",
+          respostas:["espada"] },
+
+        { tipo:"adivinha", id:"adv19", n:19,
+          pergunta:"Anagrama: põe as letras em ordem.\nRABEDNIA",
+          respostas:["bandeira"] },
+
+        { tipo:"adivinha", id:"adv20", n:20,
+          pergunta:"Sudoku 6×6 no caderno: completa o mapa dos cartógrafos e lê a diagonal.",
+          extraTitulo:"Coordenadas dos cartógrafos — linha, coluna, número",
+          extra:["L1 C1 = 4","L1 C2 = 1","L1 C4 = 3","L4 C3 = 4","L4 C4 = 1","L4 C5 = 5",
+                 "L5 C2 = 4","L5 C3 = 1","L6 C1 = 6","L6 C6 = 3"],
+          respostas:["425163"] }
       ]
     },
     {
-      id: "01_01", tipo: "nivel", tema: "piratas", rotulo: "Nível 1 P.1",
-      titulo: "Nível 1",
-      fita: "A Odisseia começa",
-      regras: {
-        titulo: "Código de Pirata",
-        selo: "As regras a bordo",
-        artigos: [
-          "Cada marinheiro joga por si. A Capitã Sónia tem sempre prioridade no leme.",
-          "A tripulação (família) pode ajudar, mas só em terra firme, fora da app.",
-          "Cada um guarda as suas respostas no seu diário de bordo. Mapa perdido não se refaz.",
-          "Só se navega com rede. A app só funciona online.",
-          "Cada nível só abre no seu mês, com a pista enviada pelo Captain Gonçalo Sparrow.",
-          "As dicas existem para os complicados, mas por ordem e com o papagaio a reclamar."
-        ]
-      },
-      papagaio: { imagem: "assets/bacalhau.webp", alt: "Bacalhau, o papagaio pirata" },
-      falas: [
-        "Capitã Sónia! O Captain Gonçalo Sparrow roubou o teu tesouro! Agora tens de o recuperar! Durante anos foste tu que o mandaste ao mar de pistas. Pelos vistos a maré virou, espero que tenhas um grande e rápido navio!",
-        "Esqueci-me, nem me apresentei. O meu nome é BACALHAU! O papagaio mais português dos sete mares."
-      ],
-      pista: {
-        selo: "Pista 1",
-        sub: "Decifra e avança",
-        mapa: { imagem: "assets/mapa.webp", alt: "Mapa do tesouro" },
-        enigma: "Sou pequena e vivo em todo o lado.\nSozinha não digo muito, mas junta com outras como eu digo tudo.\nQuem cá devia estar encontra-se no início do sono.\nO pirata mandou saltar da prancha, foi ao mar perdeu o lugar.\nEntão estou cá eu onde não devia,\nDentro do que tu procuras.\nQuem sou eu?",
-        etiqueta: "A tua resposta",
-        marcador: "Escreve aqui",
-        botao: "Para a vante",
-        respostas: ["z"],
-        certo: { emblema: "🏴‍☠️", texto: "Parabéns Marujo! Agora pausa para uma garrafa de Rum", botao: "Arrr!", destino: "01_02" },
-        errado: { emblema: "⚓", texto: "És um marujo de Terra firme… ERRADO!", botao: "Repetir" }
-      }
+      /* ===== NÍVEL 1 — uma cena (ilha) por página ===== */
+      id: "01_01", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.1",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Nível 1", fita:"A deserção do Bacalhau" },
+
+        { tipo:"papagaio", imagem:"assets/bacalhau.webp", alt:"Bacalhau, o papagaio pirata" },
+
+        { tipo:"fala", textos:[
+          "Psst. Madrinha dos Mares. Sim, tu. Não olhes para trás, que só estou eu aqui.",
+          "Chamo-me Bacalhau, o papagaio mais português dos sete mares. Trabalhei três anos para o Captain Gonçalo Çparrow. O salário era em sementes. E atrasadas… Desertei hoje de manhã e não volto.",
+          "Mas antes de sair encontrei isto no camarote dele. Acho que é para ti."
+        ]},
+
+        { tipo:"imagem", imagem:"assets/bilhete-camarote.webp",
+          alt:"Bilhete do Captain G. Çparrow para a Madrinha dos Mares" },
+
+        { tipo:"fala", textos:[
+          "Ele diz sempre isso. Eu mexo sempre. É assim que se sabe onde as coisas estão.",
+          "Trouxe também isto. A bússola dele. Aviso já que não aponta para norte. Aponta para a picanha mais próxima. Já fui parar a três churrascos.",
+          "E antes que perguntes pelo gancho: ele diz que perdeu a mão numa discussão sobre o Acordo Ortográfico. Ele conta a história inteira sempre que alguém olha para o gancho.",
+          "Um aviso de quem já viu muito mar: usem o vosso diário de bordo. A Madrinha dos Mares e os Piratas de Água Doce devem usá-lo para resolver todos os problemas, apontar as respostas e os bilhetes perdidos pelo caminho."
+        ]},
+
+        { tipo:"regras", titulo:"O Código de Piratas", selo:"O Bacalhau lê as regras",
+          artigos:[
+            "Cada marinheiro joga por si. A Madrinha dos Mares tem sempre prioridade no leme.",
+            "Os Piratas de Água Doce (família) podem ajudar, mas só em terra firme, fora da app.",
+            "As respostas e os bilhetes devem ser apontados no diário de bordo, porque mapa perdido não se refaz.",
+            "Só se navega com rede. A app só funciona online.",
+            "Cada nível só abre no seu mês, com a pista enviada pelo Captain Gonçalo Çparrow.",
+            "As pistas existem para os complicados, mas por ordem e com o papagaio a reclamar."
+          ]},
+
+        { tipo:"avancar", texto:"Avançar", destino:"01_02" }
+      ]
     },
     {
-      id: "01_02", tipo: "aviso", tema: "moderno", rotulo: "Nível 1 P.2",
+      id: "01_02", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.2",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 1", fita:"Encontro com o Bacalhau" },
+
+        { tipo:"texto", texto:"Cada ilha do caminho guarda a sua adivinha. Resolve a desta ilha para levantar âncora e seguir para a seguinte." },
+
+        { tipo:"fala", textos:[
+          "Primeira pista. Eu só leio uma vez. Mentira, leio as vezes que for preciso, mas fica mais dramático."
+        ]},
+
+        { tipo:"pista", id:"p01_02",
+          selo:"Adivinha 1", sub:"Decifra e avança",
+          mapa:{ imagem:"assets/mapa.webp", alt:"Mapa do tesouro" },
+          enigma:"Sou pequena e vivo em todo o lado.\nSozinha não digo muito, mas junta com outras como eu digo tudo.\nQuem cá devia estar encontra-se no início do sono.\nO pirata mandou saltar da prancha, foi ao mar perdeu o lugar.\nEntão estou cá eu onde não devia,\nDentro do que tu procuras.\nQuem sou eu?",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Para a vante",
+          respostas:["z"],
+          destino:"01_03",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", texto:"Parabéns Marujo! Agora pausa para uma garrafa de Rum", botao:"Arrr!" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"És um marujo de Terra firme… ERRADO!", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_03", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.3",
+      blocos: [
+        { tipo:"fala", textos:[
+          "Z! Claro que é Z. O S foi à prancha e o Z tomou-lhe o lugar. O Çparrow tem esta mania… Onde havia um S, ele põe outra letra.",
+          "E olha, ele deixou-te um bilhete. Aponta-o no teu diário de bordo, e aponta lá todos os que fores recebendo, porque este não é o último. Levanta âncora, Madrinha dos Mares. A viagem começa agora!"
+        ]},
+
+        { tipo:"bilhete", texto:"Bilhete 1",
+          imagem:"assets/bilhete-ilha1.webp",
+          alt:"Bilhete 1 do Captain Çparrow: começaste bem, Madrinha dos Mares, mas a viagem ainda nem saiu do cais." },
+
+        { tipo:"avancar", texto:"Avançar", destino:"01_04" }
+      ]
+    },
+    {
+      id: "01_04", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.4",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 2", fita:"Ilha do Mago Trapalhão" },
+
+        { tipo:"fala", textos:[
+          "O mago tem um pergaminho do Çparrow. Diz que o feitiço só se desfaz com a coisa de que ele mais gostava em pequeno. Eu nunca o conheci pequeno, mas disseram-me que a Madrinha dos Mares e os Piratas de Água Doce conhecem a história."
+        ]},
+
+        { tipo:"pista", id:"p01_04",
+          selo:"Adivinha 2", sub:"Desfaz o feitiço",
+          enigma:"O feitiço baralhou as letras. Põe-nas no sítio e diz a palavra que desfaz o feitiço.",
+          pergaminho:"Em Telhadela, quando eu era pequeno, a coisa de que mais gostava era brincar enquanto o vovô me dava um OBHAN ED GAMIRUANE.",
+          pergaminhoAssinatura:"— Capt. G. Çparrow",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Desfazer o feitiço",
+          respostas:["banho de mangueira"],
+          destino:"01_05",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"Banho de mangueira! O vovô devia ser melhor mago do que este.",
+                  bilhete:{ texto:"Bilhete 2", imagem:"assets/bilhete-ilha2.webp",
+                            alt:"Bilhete 2 do Captain Çparrow: o vovô nunca soube quem ficava mais molhado, se eu ou ele." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"O feitiço continua de pé. Tenta outra vez.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_05", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.5",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 3", fita:"Ilha do Baile de Máscaras" },
+
+        { tipo:"texto", alinhar:"esquerda",
+          texto:"O Çparrow dá um baile de máscaras e jura que o convidado de honra só chega quando a Madrinha dos Mares chegar. Vem num saco fechado, sem nome, porque quem o conhece já o devorou da última vez. Todos os convidados estão mascarados e o Bacalhau está a vigiar o saco, com muito esforço. A Madrinha dos Mares e os Piratas de Água Doce têm de descobrir quem é o convidado de honra para abrirem o saco e a festa começar." },
+
+        { tipo:"fala", textos:[
+          "Madrinha dos Mares, põe a máscara, que isto é um baile. O convidado de honra veio na tua bagagem, e o Çparrow não me diz quem é. Eu só sei que cheira bem e que desaparece depressa. Já vi três piratas a chorar por causa disto."
+        ]},
+
+        { tipo:"pista", id:"p01_05",
+          selo:"Adivinha 3", sub:"Quem é o convidado de honra",
+          enigma:"Venho de longe, e só chego quando a Madrinha dos Mares chega.\nNasci numa folha enorme e verde, fui à frigideira e saí fininha e dourada.\nViajo na mala, entre a roupa e os presentes, e nunca chego inteira.\nQuem me abre nunca come só uma.\nSou o convidado de honra deste baile. Quem sou eu?",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Abrir o saco",
+          respostas:["chips de banana frita","banana frita","chips de banana"],
+          destino:"01_06",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"Chips de banana frita! Eu sabia. Eu sabia pelo cheiro. Abram o saco! Madrinha dos Mares, nunca mais te deixo viajar sem mala.",
+                  bilhete:{ texto:"Bilhete 3", imagem:"assets/bilhete-ilha3.webp",
+                            alt:"Bilhete 3 do Captain Çparrow: nunca consegui comer só um, e a culpa é toda tua." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"O saco continua fechado. Tenta outra vez.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_06", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.6",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 4", fita:"Ilha do Escrivão Desconfiado" },
+
+        { tipo:"texto", alinhar:"esquerda",
+          texto:"O escrivão do Çparrow guarda os segredos do capitão em cifra, porque os papagaios leem tudo por cima do ombro. Hoje guarda uma memória de Natal: o dia em que, em casa dos vovôs, o Çparrow recebeu a sua primeira guitarra. O escrivão só entrega o rasto do baú a quem provar que conhece mesmo o Çparrow. Para isso, a Madrinha dos Mares e os Piratas de Água Doce têm de ler a marca da guitarra, que ele escondeu em cifra." },
+
+        { tipo:"fala", textos:[
+          "Este escrivão desconfia de mim. Disse que os papagaios leem por cima do ombro. Eu só estava a ver se ele tinha sementes. Contigo, Madrinha dos Mares, ele talvez fale. Mas vais precisar de papel e caneta."
+        ]},
+
+        { tipo:"pista", id:"p01_06",
+          selo:"Adivinha 4", sub:"A cifra do escrivão",
+          enigma:"Num Natal, em casa dos vovôs, o Çparrow recebeu a sua primeira guitarra.\nA marca ficou escrita em cifra, para os papagaios não verem:",
+          codigo:"YZGMM",
+          instrucao:"Pega em papel e caneta. Escreve o alfabeto e desfaz o segredo do escrivão. A chave é o número de cordas da guitarra.",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Entregar ao escrivão",
+          respostas:["stagg"],
+          destino:"01_07",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"STAGG! A primeira guitarra do Çparrow. Dizem que foi a primeira de muitas.",
+                  bilhete:{ texto:"Bilhete 4", imagem:"assets/bilhete-ilha4.webp",
+                            alt:"Bilhete 4 do Captain Çparrow: toda a música que sei começou numa sala com todos vocês, debaixo de uma árvore de Natal." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"O escrivão abana a cabeça e guarda o papel. Tenta outra vez.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_07", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.7",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 5", fita:"Ilha do Camarote Arrumado" },
+
+        { tipo:"texto", alinhar:"esquerda",
+          texto:"O Çparrow é o pirata mais arrumado dos sete mares: tudo alinhado, tudo no sítio. Desta vez saiu à pressa e deixou o camarote de pernas para o ar. O Bacalhau guardou duas imagens da mesa, uma de manhã e outra à tarde. Entre as duas, alguém passou por lá e levou uma coisa. A Madrinha dos Mares e os Piratas de Água Doce têm de descobrir o que desapareceu, no meio de tanta desordem." },
+
+        { tipo:"fala", textos:[
+          "Madrinha dos Mares, o camarote do Çparrow está de pernas para o ar. Ele, que é o pirata mais arrumado dos sete mares! Só pode ter saído à pressa. Tenho aqui duas imagens, a de manhã e a de tarde, e entre as duas alguém levou uma coisa. Eu não consigo ver o quê. Os papagaios só reparam no que se pode comer. Chama os Piratas de Água Doce, que uns olhos a mais ajudam."
+        ]},
+
+        { tipo:"pista", id:"p01_07",
+          selo:"Adivinha 5", sub:"O que desapareceu da mesa",
+          enigma:"A mesa do camarote, fotografada duas vezes no mesmo dia.",
+          /* enquanto não houver as fotos reais, cada botão abre um aviso */
+          fotos:[
+            { texto:"Foto 1", aviso:"introduzir foto 1" },
+            { texto:"Foto 2", aviso:"introduzir foto 2" }
+          ],
+          instrucao:"Dois momentos, uma mesa. Falta uma coisa. Qual?",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Dar o alarme",
+          respostas:["caneta","a caneta","uma caneta"],
+          destino:"01_08",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"A caneta! Claro que era a caneta. Eu passei a manhã inteira a olhar para a mesa à procura de comida e não vi nada. Os Piratas de Água Doce têm mesmo bons olhos.",
+                  bilhete:{ texto:"Bilhete 5", imagem:"assets/bilhete-ilha5.webp",
+                            alt:"Bilhete 5 do Captain Çparrow: regressei ao camarote só para ir buscar a caneta, e tu viste logo que faltava." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"Isso continua na mesa. Olha outra vez.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_08", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.8",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 6", fita:"Ilha da Rosa dos Ventos" },
+
+        { tipo:"texto", alinhar:"esquerda",
+          texto:"Na Ilha da Rosa dos Ventos encontram-se os oito ventos: Norte, Sul, Este, Oeste e as quatro diagonais. Dizem que por aqui passou um viajante da família do Çparrow, que já deu a volta ao mundo e ouviu cada vento pelo caminho. Os ventos escreveram o nome dele na areia, traço a traço, e a tempestade apagou-o. Só ficaram as instruções de cada vento. A Madrinha dos Mares e os Piratas de Água Doce têm de segui-las no caderno quadriculado para o nome voltar a aparecer." },
+
+        { tipo:"fala", textos:[
+          "Madrinha dos Mares, bem-vinda à Ilha da Rosa dos Ventos. Dizem que um viajante passou por aqui depois de dar a volta ao mundo. Partiu rumo ao Norte, desceu ao Sul, foi ao Este e voltou pelo Oeste, e nunca se perdeu. A minha Bússola Gulosa não ajuda: está a apontar para Sudeste, o que quer dizer que há picanha por perto. Chama os Piratas de Água Doce e arranjem papel quadriculado."
+        ]},
+
+        { tipo:"pista", id:"p01_08",
+          selo:"Adivinha 6", sub:"O nome escrito pelos ventos",
+          enigma:"Cada alínea é uma letra diferente. Passo a passo:",
+          passos:[
+            "Norte, Norte, Norte, Norte, Este, Este, Sul, Sul, Oeste, Oeste, Sudeste, Sudeste",
+            "Este, Nordeste, Norte, Noroeste, Oeste, Sudoeste, Sul, Sudeste",
+            "Norte, Norte, Norte, Sudeste, Sudeste, Nordeste, Nordeste, Sul, Sul, Sul",
+            "Oeste, Oeste, Sul, Sul, Este, Este, Oeste, Oeste, Sul, Sul, Este, Este",
+            "Sul, Sul, Sudeste, Este, Nordeste, Norte, Norte"
+          ],
+          instrucao:"Os ventos escreveram o nome dele na areia, e a tempestade apagou-o. Segue as instruções no teu caderno quadriculado. Cada alínea é uma letra diferente.",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Ler o nome na areia",
+          respostas:["romeu"],
+          destino:"01_09",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"Romeu! O Peugeot Verde que deu a volta ao mundo e nunca perdeu o Norte. A Bússola Gulosa diz que ele parava sempre onde havia picanha.",
+                  bilhete:{ texto:"Bilhete 6", imagem:"assets/bilhete-ilha6.webp",
+                            alt:"Bilhete 6 do Captain Çparrow: ao Romeu devo muitas viagens, e a ti devo as melhores histórias para contar nelas." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"Os ventos não escreveram isso. Volta ao caderno.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_09", tipo: "blocos", tema: "piratas", rotulo: "Nível 1 P.9",
+      blocos: [
+        { tipo:"cabecalho", titulo:"Ilha 7", fita:"Ilha do Telégrafo Naufragado" },
+
+        { tipo:"texto", alinhar:"esquerda",
+          texto:"No meio do nevoeiro, o telégrafo de um navio afundado bate sozinho. É o único sítio de onde o Çparrow consegue chamar quem está longe, e a mensagem repete-se sem parar, em traços e pontos. A Madrinha dos Mares e os Piratas de Água Doce têm de a decifrar. Quem a escreveu escolheu uma canção e, para a ouvirem, têm de dizer quem a canta." },
+
+        { tipo:"fala", textos:[
+          "Madrinha dos Mares, bem-vinda à Ilha do Telégrafo Naufragado. Aquela ferrugem toda a bater sozinha é o telégrafo de um navio que já nem existe. Nos mares do Çparrow, quem está longe só se faz ouvir assim. Chama os Piratas de Água Doce, que isto é para decifrar em equipa."
+        ]},
+
+        { tipo:"pista", id:"p01_09",
+          selo:"Adivinha 7", sub:"A mensagem do telégrafo",
+          enigma:"O telégrafo bate, sem parar, sempre o mesmo:",
+          codigo:"- ..- -.. --- / --- / --.- ..- . / . ..- / - . / -.. --- ..-",
+          codigoLongo:true,
+          instrucao:"O telégrafo repete esta mensagem em código Morse. Decifra-a. A mensagem é o nome de uma canção. A resposta que o telégrafo pede é o nome de quem a canta.",
+          etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Responder ao telégrafo",
+          respostas:["pedro abrunhosa","abrunhosa"],
+          destino:"01_10",
+          certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
+                  texto:"Pedro Abrunhosa! «Tudo o que eu te dou». Este Çparrow dedicou-te isto mas a única coisa que nos dá é problemas e dores de cabeça!",
+                  bilhete:{ texto:"Bilhete 7", imagem:"assets/bilhete-ilha7.webp",
+                            alt:"Bilhete 7 do Captain Çparrow: bati no telégrafo durante uma semana até alguém responder, e afinal foste tu." },
+                  botao:"Avançar" },
+          errado:{ emblema:"⚓", tipo:"errado", texto:"O telégrafo continua a bater o mesmo. Tenta outra vez.", botao:"Repetir" } }
+      ]
+    },
+    {
+      id: "01_10", tipo: "aviso", tema: "piratas", rotulo: "Nível 1 P.10",
       titulo: "OBRAS NO MAR, SEMÁFORO VERMELHO!",
       nota: "Este nível ainda está em construção no estaleiro."
     }
@@ -570,6 +1020,9 @@ const app = document.getElementById("app");
 const veu = document.getElementById("veu");
 const popupEmblema = document.getElementById("popup-emblema");
 const popupTexto = document.getElementById("popup-texto");
+const visor = document.getElementById("visor");
+const visorImagem = document.getElementById("visor-imagem");
+const visorFechar = document.getElementById("visor-fechar");
 const popupBotoes = document.getElementById("popup-botoes");
 const popupCampo = document.getElementById("popup-campo");
 const popupForm = document.getElementById("popup-form");
@@ -661,85 +1114,9 @@ function pedirPasse(f, destino){
   });
 }
 
-/* ---------- nível ---------- */
-function construirNivel(dados){
-  const c = el("div","pagina-conteudo");
-
-  const cab = el("header","nivel-cabecalho");
-  cab.appendChild(el("h1",null,dados.titulo));
-  cab.appendChild(el("span","fita",dados.fita));
-  c.appendChild(cab);
-
-  /* regras */
-  const regras = el("section","painel");
-  regras.appendChild(el("h2",null,dados.regras.titulo));
-  regras.appendChild(el("span","selo",dados.regras.selo));
-  const lista = el("ol","artigos");
-  dados.regras.artigos.forEach((texto,i)=>{
-    const li = el("li");
-    li.appendChild(el("span","num",String(i+1)));
-    const corpo = el("div","texto");
-    corpo.appendChild(el("span","rotulo","Artigo "+(i+1)+": "));
-    corpo.appendChild(document.createTextNode(texto));
-    li.appendChild(corpo);
-    lista.appendChild(li);
-  });
-  regras.appendChild(lista);
-  c.appendChild(regras);
-
-  const div = el("div","divisoria");
-  div.appendChild(el("span",null,"⚓"));
-  c.appendChild(div);
-
-  /* papagaio + falas */
-  if(dados.papagaio){
-    const palco = el("div","palco-papagaio");
-    palco.appendChild(imagem(dados.papagaio.imagem, dados.papagaio.alt));
-    c.appendChild(palco);
-  }
-  dados.falas.forEach(texto=>{
-    const b = el("div","balao");
-    b.appendChild(el("p",null,texto));
-    c.appendChild(b);
-  });
-
-  /* pista */
-  const p = dados.pista;
-  const caixa = el("section","painel pista");
-  if(p.mapa) caixa.appendChild(imagem(p.mapa.imagem, p.mapa.alt, "mapa"));
-  caixa.appendChild(el("span","selo-pista",p.selo));
-  caixa.appendChild(el("span","sub-pista",p.sub));
-  caixa.appendChild(el("p","enigma",p.enigma));
-
-  const form = el("form","campo");
-  const label = el("label",null,p.etiqueta);
-  label.setAttribute("for","resposta-"+dados.id);
-  const input = el("input");
-  input.type="text"; input.id="resposta-"+dados.id;
-  input.placeholder=p.marcador; input.autocomplete="off";
-  input.setAttribute("autocapitalize","none");
-  input.setAttribute("spellcheck","false");
-  const enviar = el("button","btn btn-vermelho",p.botao);
-  enviar.type="submit";
-  form.append(label,input,enviar);
-  form.addEventListener("submit",ev=>{
-    ev.preventDefault();
-    if(certa(input.value,p.respostas)){
-      popup({emblema:p.certo.emblema,tipo:"certo",texto:p.certo.texto,botao:p.certo.botao,
-             acao:()=>{fecharPopup();irPara(p.certo.destino);}});
-    }else{
-      popup({emblema:p.errado.emblema,tipo:"errado",texto:p.errado.texto,botao:p.errado.botao,
-             acao:()=>{fecharPopup();input.focus();input.select();}});
-    }
-  });
-  caixa.appendChild(form);
-  c.appendChild(caixa);
-  return c;
-}
-
-/* ---------- página de blocos (nível 0) ---------- */
-const CERTO = { emblema:"🏴‍☠️", tipo:"certo", texto:"Certo", botao:"Continuar" };
-const ERRADO = { emblema:"⚓", tipo:"errado", texto:"Errado", botao:"Continuar" };
+/* ---------- páginas montadas por blocos ---------- */
+const CERTO = { emblema:"🏴‍☠️", tipo:"certo", texto:"Certo, marujo!", botao:"Avante!" };
+const ERRADO = { emblema:"⚓", tipo:"errado", texto:"Errado. Volta ao leme e tenta outra vez.", botao:"Arrr!" };
 
 /* {nome} nos textos é trocado pelo nome do jogador */
 function comNome(texto){ return String(texto).replace(/\{nome\}/g, estado.nome || "marujo"); }
@@ -763,6 +1140,19 @@ function marcaOk(c, b){
   }
   c.classList.add("resolvida");
   marcar(b.id);
+}
+/* número da adivinha, enunciado e, se houver, a lista de dados extra */
+function enunciado(c, b){
+  if(b.n != null) c.appendChild(el("span","numero","Adivinha " + b.n));
+  c.appendChild(el("h3",null,b.pergunta));
+  if(b.extra){
+    const bloco = el("div","dados");
+    if(b.extraTitulo) bloco.appendChild(el("h4",null,b.extraTitulo));
+    const lista = el("ul");
+    b.extra.forEach(linha=>lista.appendChild(el("li",null,linha)));
+    bloco.appendChild(lista);
+    c.appendChild(bloco);
+  }
 }
 function linhaCampo(marcador, rotuloBotao){
   const f = el("form","linha-campo");
@@ -820,88 +1210,199 @@ const BLOCOS = {
 
   titulo(b){ return el("h2","titulo-seccao",b.texto); },
 
-  escolha(b){
+  cabecalho(b){
+    const cab = el("header","nivel-cabecalho");
+    cab.appendChild(el("h1",null,b.titulo));
+    if(b.fita) cab.appendChild(el("span","fita",b.fita));
+    return cab;
+  },
+
+  papagaio(b){
+    const palco = el("div","palco-papagaio");
+    palco.appendChild(imagem(b.imagem, b.alt));
+    return palco;
+  },
+
+  /* uma ou várias falas seguidas, cada uma no seu balão, sempre com o Bacalhau ao lado */
+  fala(b){
+    const cena = el("div","cena-fala");
+    const retrato = el("div","retrato");
+    retrato.appendChild(imagem(b.quemImagem || JOGO.papagaio, b.quemAlt || "Bacalhau, o papagaio"));
+    cena.appendChild(retrato);
+
+    const quem = (b.quem || "Bacalhau").toUpperCase() + ":";
+    const grupo = el("div","grupo-falas");
+    (b.textos || [b.texto]).forEach(texto=>{
+      const balao = el("div","balao");
+      const p = el("p");
+      p.appendChild(el("strong","quem-fala",quem + " "));
+      p.appendChild(document.createTextNode(comNome(texto)));
+      balao.appendChild(p);
+      grupo.appendChild(balao);
+    });
+    cena.appendChild(grupo);
+    return cena;
+  },
+
+  /* explicação curta, fora de balão de fala */
+  texto(b){
+    return el("p","texto-cena" + (b.alinhar === "esquerda" ? " esquerda" : ""), comNome(b.texto));
+  },
+
+  /* botão que abre o bilhete em ecrã cheio */
+  bilhete(b){
+    const bt = el("button","btn btn-bilhete",b.texto);
+    bt.type="button";
+    bt.addEventListener("click",()=>abrirVisor(b.imagem,b.alt));
+    return bt;
+  },
+
+  /* imagem de cena: bilhete, mapa, fotografia */
+  imagem(b){
+    const moldura = el("figure","moldura");
+    moldura.appendChild(imagem(b.imagem, b.alt));
+    if(b.legenda) moldura.appendChild(el("figcaption",null,b.legenda));
+    return moldura;
+  },
+
+  regras(b){
+    const painel = el("section","painel");
+    painel.appendChild(el("h2",null,b.titulo));
+    painel.appendChild(el("span","selo",b.selo));
+    const lista = el("ol","artigos");
+    b.artigos.forEach((texto,i)=>{
+      const li = el("li");
+      li.appendChild(el("span","num",String(i+1)));
+      const corpo = el("div","texto");
+      corpo.appendChild(el("span","rotulo","Artigo "+(i+1)+": "));
+      corpo.appendChild(document.createTextNode(texto));
+      li.appendChild(corpo);
+      lista.appendChild(li);
+    });
+    painel.appendChild(lista);
+    return painel;
+  },
+
+  /* pista da ilha: enunciado, resposta e, depois de acertada, o botão de avançar */
+  pista(b){
+    const c = el("section","painel pista");
+    if(b.mapa) c.appendChild(imagem(b.mapa.imagem, b.mapa.alt, "mapa"));
+    c.appendChild(el("span","selo-pista",b.selo));
+    c.appendChild(el("span","sub-pista",b.sub));
+    c.appendChild(el("p","enigma",comNome(b.enigma)));
+
+    /* fotografias a comparar */
+    if(b.fotos){
+      const linha = el("div","linha-fotos");
+      b.fotos.forEach(f=>{
+        const bt = el("button","btn btn-bilhete",f.texto);
+        bt.type="button";
+        bt.addEventListener("click",()=>{
+          if(f.imagem) abrirVisor(f.imagem, f.alt || f.texto);
+          else popup({ emblema:"📷", texto:f.aviso, botao:"Fechar", acao:()=>fecharPopup() });
+        });
+        linha.appendChild(bt);
+      });
+      c.appendChild(linha);
+    }
+
+    /* lista de passos numerados, uma alínea por linha */
+    if(b.passos){
+      const ol = el("ol","passos");
+      b.passos.forEach(linha=>ol.appendChild(el("li",null,linha)));
+      c.appendChild(ol);
+    }
+
+    /* código a decifrar, em destaque */
+    if(b.codigo) c.appendChild(el("p","codigo" + (b.codigoLongo ? " longo" : ""), b.codigo));
+    /* instrução de como resolver */
+    if(b.instrucao) c.appendChild(el("p","instrucao",comNome(b.instrucao)));
+
+    /* mensagem num pergaminho, quando a ilha tem uma */
+    if(b.pergaminho){
+      const rolo = el("blockquote","pergaminho");
+      rolo.appendChild(el("p",null,comNome(b.pergaminho)));
+      if(b.pergaminhoAssinatura) rolo.appendChild(el("cite",null,b.pergaminhoAssinatura));
+      c.appendChild(rolo);
+    }
+
+    const form = el("form","campo");
+    const label = el("label",null,b.etiqueta);
+    label.setAttribute("for","resposta-"+b.id);
+    const input = el("input");
+    input.type="text"; input.id="resposta-"+b.id;
+    input.placeholder=b.marcador; input.autocomplete="off";
+    input.setAttribute("autocapitalize","none");
+    input.setAttribute("spellcheck","false");
+
+    const linha = el("div","linha-acoes");
+    const enviar = el("button","btn btn-vermelho",b.botao);
+    enviar.type="submit";
+    linha.appendChild(enviar);
+
+    /* só existe depois de a adivinha já ter sido acertada uma vez */
+    const seguir = el("button","btn btn-seguir","avançar");
+    seguir.type="button";
+    seguir.hidden = !estado.feitos[b.id];
+    seguir.addEventListener("click",()=>irPara(b.destino));
+    linha.appendChild(seguir);
+
+    form.append(label,input,linha);
+    form.addEventListener("submit",ev=>{
+      ev.preventDefault();
+      if(certa(input.value,b.respostas)){
+        marcar(b.id);
+        seguir.hidden = false;
+        if(b.certo.bilhete){
+          /* acerto com bilhete: ver o bilhete ou seguir viagem */
+          popup({ emblema:b.certo.emblema, tipo:b.certo.tipo, quem:b.certo.quem,
+                  texto:b.certo.texto, botoes:[
+            { texto:b.certo.bilhete.texto, classe:"btn-bilhete",
+              acao:()=>abrirVisor(b.certo.bilhete.imagem, b.certo.bilhete.alt) },
+            { texto:b.certo.botao, classe:"btn-seguir",
+              acao:()=>{ fecharPopup(); irPara(b.destino); } }
+          ]});
+        }else{
+          mostrar(b.certo, ()=>irPara(b.destino));
+        }
+      }else{
+        mostrar(b.errado, ()=>{ input.focus(); input.select(); });
+      }
+    });
+    c.appendChild(form);
+    return c;
+  },
+
+  /* avanço simples numa cena sem adivinha */
+  avancar(b){
+    const bt = el("button","btn",b.texto || "Avançar");
+    bt.type="button";
+    bt.addEventListener("click",()=>irPara(b.destino));
+    return bt;
+  },
+
+  /* resposta por botões: o certo abre o pop-up de acerto, os outros o de erro */
+  botoes(b){
     const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
-    const linha = el("div","opcoes");
-    b.opcoes.forEach(op=>{
-      const bt = el("button","btn btn-op",op.texto);
+    enunciado(c,b);
+    const linha = el("div","opcoes" + (b.grelha ? " grelha-op" : ""));
+    b.opcoes.forEach(texto=>{
+      const bt = el("button","btn btn-op",texto);
       bt.type="button";
-      bt.addEventListener("click",()=>mostrar(op.popup, ()=>{ if(op.certa) marcaOk(c,b); }));
+      bt.addEventListener("click",()=>{
+        if(certa(texto,b.respostas)) mostrar(CERTO, ()=>marcaOk(c,b));
+        else mostrar(ERRADO);
+      });
       linha.appendChild(bt);
     });
     c.appendChild(linha);
     return c;
   },
 
-  escala(b){
-    const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
-    const bt = el("button","btn btn-op",b.botao);
-    bt.type="button";
-    const abrirEscala = ()=>{
-      const botoes = [];
-      for(let n=0;n<=10;n++){
-        const valor = String(n);
-        botoes.push({ texto:valor, classe:"btn-neutro", acao:()=>{
-          if(valor === b.certo) mostrar(b.acerto, ()=>marcaOk(c,b));
-          else mostrar(b.falha, abrirEscala);
-        }});
-      }
-      popup({ texto:b.perguntaLonga, botoes, grelha:true, largo:true });
-    };
-    bt.addEventListener("click",abrirEscala);
-    c.appendChild(bt);
-    return c;
-  },
-
-  vf(b){
-    const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
-    const bt = el("button","btn btn-op",b.botao);
-    bt.type="button";
-    bt.addEventListener("click",()=>{
-      popup({ texto:b.pergunta, botoes:[
-        { texto:b.verdadeiro, classe:"btn-neutro", acao:botao=>{
-            botao.classList.remove("btn-neutro");
-            botao.classList.add("btn-verde");
-            setTimeout(()=>{ fecharPopup(); marcaOk(c,b); },450);
-          }},
-        { texto:b.falso, classe:"btn-neutro", acao:botao=>{
-            botao.classList.remove("btn-neutro");
-            botao.classList.add("btn-vermelho");
-          }}
-      ]});
-    });
-    c.appendChild(bt);
-    return c;
-  },
-
-  obvio(b){
-    const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
-    const bt = el("button","btn",b.botao);
-    bt.type="button";
-    bt.addEventListener("click",()=>mostrar(b.popup, ()=>marcaOk(c,b)));
-    c.appendChild(bt);
-    return c;
-  },
-
-  afirmacao(b){
-    const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
-    const { form, input } = linhaCampo(b.marcador, b.botao);
-    form.addEventListener("submit",ev=>{
-      ev.preventDefault();
-      mostrar(b.popup, ()=>marcaOk(c,b));
-    });
-    c.appendChild(form);
-    return c;
-  },
-
+  /* resposta escrita */
   adivinha(b){
     const c = caixa(b);
-    c.appendChild(el("h3",null,b.pergunta));
+    enunciado(c,b);
     const { form, input } = linhaCampo("Resposta","responder");
     form.addEventListener("submit",ev=>{
       ev.preventDefault();
@@ -951,7 +1452,9 @@ function construirAviso(dados){
 let acaoPopup = null;
 function popup(cfg){
   popupEmblema.textContent = cfg.emblema || "";
-  popupTexto.textContent = cfg.texto;
+  popupTexto.textContent = "";
+  if(cfg.quem) popupTexto.appendChild(el("strong","quem-fala",cfg.quem.toUpperCase()+": "));
+  popupTexto.appendChild(document.createTextNode(comNome(cfg.texto)));
   popupTexto.className = cfg.tipo || "";
   popupCampo.hidden = !cfg.campo;
   popupCampo.value = "";
@@ -979,6 +1482,18 @@ function popup(cfg){
   (cfg.campo ? popupCampo : primeiro).focus();
 }
 function fecharPopup(){ veu.hidden = true; acaoPopup = null; }
+
+/* visor de imagem em ecrã cheio, para os bilhetes */
+function abrirVisor(src, alt){
+  visorImagem.src = src;
+  visorImagem.alt = alt || "";
+  visor.hidden = false;
+  visorFechar.focus();
+}
+function fecharVisor(){ visor.hidden = true; visorImagem.removeAttribute("src"); }
+visorFechar.addEventListener("click",fecharVisor);
+visor.addEventListener("click",ev=>{ if(ev.target === visor) fecharVisor(); });
+document.addEventListener("keydown",ev=>{ if(ev.key === "Escape" && !visor.hidden) fecharVisor(); });
 popupForm.addEventListener("submit",ev=>{
   ev.preventDefault();
   if(acaoPopup) acaoPopup(popupCampo.value);
@@ -992,10 +1507,9 @@ function desenhar(){
   app.innerHTML = "";
   const seccao = el("section","pagina");
   seccao.id = "pagina-"+dados.id;
-  if(dados.tipo==="nivel") seccao.classList.add("nivel");
+  if(dados.tema==="piratas") seccao.classList.add("nivel");
 
   if(dados.tipo==="capa") seccao.appendChild(construirCapa(dados));
-  else if(dados.tipo==="nivel") seccao.appendChild(construirNivel(dados));
   else if(dados.tipo==="blocos") seccao.appendChild(construirBlocos(dados));
   else seccao.appendChild(construirAviso(dados));
 
@@ -1027,11 +1541,8 @@ if(estado.nome && JOGO.regresso){
 </script>
 
 <script>
-/* a app é só online: o service worker existe para ela ser instalável, não guarda conteúdo */
 if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>{
-    navigator.serviceWorker.register("sw.js").catch(()=>{});
-  });
+  window.addEventListener("load",()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
 }
 </script>
 </body>
