@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 440" role="img" aria-label="Chave dourada antiga">
+  <defs>
+    <linearGradient id="ouro" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9A6E12"/>
+      <stop offset="28%" stop-color="#F5D06A"/>
+      <stop offset="50%" stop-color="#FFEFB8"/>
+      <stop offset="72%" stop-color="#E3B13A"/>
+      <stop offset="100%" stop-color="#8C6210"/>
+    </linearGradient>
+    <radialGradient id="auraChave" cx="50%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#FFE9A8" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#F5C242" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="100" cy="180" rx="95" ry="190" fill="url(#auraChave)"/>
+
+  <g stroke="#6B4A0C" stroke-width="3" fill="url(#ouro)">
+    <!-- argola exterior -->
+    <circle cx="100" cy="92" r="62"/>
+    <!-- lóbulos decorativos -->
+    <circle cx="100" cy="24" r="17"/>
+    <circle cx="44" cy="124" r="14"/>
+    <circle cx="156" cy="124" r="14"/>
+    <!-- haste -->
+    <rect x="88" y="150" width="24" height="248" rx="8"/>
+    <!-- anel a meio da haste -->
+    <rect x="76" y="238" width="48" height="16" rx="6"/>
+    <!-- palhetas -->
+    <rect x="112" y="330" width="46" height="20" rx="4"/>
+    <rect x="112" y="366" width="34" height="20" rx="4"/>
+    <rect x="112" y="300" width="26" height="18" rx="4"/>
+  </g>
+
+  <!-- vazado da argola -->
+  <circle cx="100" cy="92" r="30" fill="#0A2240" stroke="#6B4A0C" stroke-width="3"/>
+  <circle cx="100" cy="24" r="6" fill="#0A2240"/>
+
+  <!-- brilhos -->
+  <g fill="#FFF6D8" opacity=".75">
+    <rect x="93" y="168" width="5" height="60" rx="2.5"/>
+    <path d="M70 58 a46 46 0 0 1 24 -22 l6 9 a36 36 0 0 0 -20 18 z"/>
+  </g>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" role="img" aria-label="Baú do tesouro aberto, cheio de moedas de ouro">
+  <defs>
+    <radialGradient id="brilho" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#FFE9A8" stop-opacity=".85"/>
+      <stop offset="55%" stop-color="#F5C242" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#F5C242" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="madeira" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B5A2B"/>
+      <stop offset="100%" stop-color="#4E2F14"/>
+    </linearGradient>
+    <linearGradient id="madeiraTampa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A06B33"/>
+      <stop offset="100%" stop-color="#6B4220"/>
+    </linearGradient>
+    <linearGradient id="ferro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F3D27A"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="moeda" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE071"/>
+      <stop offset="100%" stop-color="#C9901A"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="260" cy="200" rx="250" ry="180" fill="url(#brilho)"/>
+
+  <!-- raios de luz -->
+  <g fill="#FFE9A8" opacity=".3">
+    <polygon points="260,40 272,150 248,150"/>
+    <polygon points="120,80 220,152 206,170"/>
+    <polygon points="400,80 300,152 314,170"/>
+    <polygon points="60,170 196,172 196,188"/>
+    <polygon points="460,170 324,172 324,188"/>
+  </g>
+
+  <!-- tampa aberta -->
+  <g transform="rotate(-13 150 190)">
+    <path d="M118 96 h284 a26 26 0 0 1 26 26 v56 h-336 v-56 a26 26 0 0 1 26 -26 z" fill="url(#madeiraTampa)"/>
+    <path d="M118 96 h284 a26 26 0 0 1 26 26 v10 h-336 v-10 a26 26 0 0 1 26 -26 z" fill="#B07C3C" opacity=".55"/>
+    <rect x="92" y="166" width="336" height="16" rx="4" fill="url(#ferro)"/>
+    <rect x="150" y="96" width="16" height="86" fill="url(#ferro)" opacity=".9"/>
+    <rect x="354" y="96" width="16" height="86" fill="url(#ferro)" opacity=".9"/>
+    <rect x="246" y="92" width="28" height="90" fill="url(#ferro)"/>
+  </g>
+
+  <!-- moedas a transbordar -->
+  <g fill="url(#moeda)" stroke="#8C6210" stroke-width="2">
+    <ellipse cx="176" cy="236" rx="26" ry="11"/>
+    <ellipse cx="228" cy="226" rx="26" ry="11"/>
+    <ellipse cx="282" cy="228" rx="26" ry="11"/>
+    <ellipse cx="334" cy="238" rx="26" ry="11"/>
+    <ellipse cx="202" cy="216" rx="24" ry="10"/>
+    <ellipse cx="256" cy="210" rx="24" ry="10"/>
+    <ellipse cx="310" cy="216" rx="24" ry="10"/>
+    <ellipse cx="256" cy="196" rx="22" ry="9"/>
+  </g>
+
+  <!-- caixa do baú -->
+  <path d="M104 244 h312 a16 16 0 0 1 16 16 v88 a16 16 0 0 1 -16 16 h-312 a16 16 0 0 1 -16 -16 v-88 a16 16 0 0 1 16 -16 z" fill="url(#madeira)"/>
+  <rect x="88" y="244" width="344" height="18" rx="6" fill="url(#ferro)"/>
+  <rect x="146" y="244" width="16" height="120" fill="url(#ferro)" opacity=".9"/>
+  <rect x="358" y="244" width="16" height="120" fill="url(#ferro)" opacity=".9"/>
+  <rect x="88" y="330" width="344" height="14" rx="4" fill="url(#ferro)" opacity=".75"/>
+
+  <!-- fechadura -->
+  <rect x="240" y="272" width="40" height="46" rx="6" fill="url(#ferro)"/>
+  <circle cx="260" cy="290" r="7" fill="#4E2F14"/>
+  <rect x="257" y="292" width="6" height="14" rx="2" fill="#4E2F14"/>
+
+  <!-- moedas caídas -->
+  <g fill="url(#moeda)" stroke="#8C6210" stroke-width="2">
+    <ellipse cx="72" cy="368" rx="22" ry="9"/>
+    <ellipse cx="110" cy="376" rx="20" ry="8"/>
+    <ellipse cx="430" cy="370" rx="22" ry="9"/>
+    <ellipse cx="396" cy="378" rx="20" ry="8"/>
+  </g>
+</svg>
