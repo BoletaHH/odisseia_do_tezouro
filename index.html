@@ -1096,8 +1096,8 @@ const JOGO = {
           enigma:"A mesa do camarote, fotografada duas vezes no mesmo dia.",
           /* enquanto não houver as fotos reais, cada botão abre um aviso */
           fotos:[
-            { texto:"Foto 1", aviso:"introduzir foto 1" },
-            { texto:"Foto 2", aviso:"introduzir foto 2" }
+            { texto:"Foto 1", imagem:"assets/camarote-1.webp", alt:"A mesa do camarote de manhã" },
+            { texto:"Foto 2", imagem:"assets/camarote-2.webp", alt:"A mesa do camarote à tarde" }
           ],
           instrucao:"Dois momentos, uma mesa. Falta uma coisa. Qual?",
           etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Dar o alarme",
@@ -1408,25 +1408,31 @@ const JOGO = {
         { tipo:"enfeites", simbolos:["montanha","folha","trilho"] },
 
         { tipo:"texto", alinhar:"esquerda",
-          texto:"O barco dá com os destroços de um navio de cartógrafos, naufragado há muito. Entre os restos está o mapa de Machu Picchu, a montanha que a Madrinha dos Mares subiu e onde, lá no alto, mascou folhas de coca e se achou um papagaio. A montanha tinha 8 patamares com 8 trilhos cada, e daí a grelha de 8×8. A água apagou quase todos os números e os cartógrafos só deixaram as coordenadas de 17. A Madrinha dos Mares e os Piratas de Água Doce têm de desenhar a grelha, colocar esses números e completar o resto. A diagonal, lida da base ao cume, é a data marcada no topo do mapa. A última página do diário dos cartógrafos tem uma mensagem em código de César." },
+          texto:"O barco dá com os destroços de um navio de cartógrafos, naufragado há muito. Entre os restos está o mapa de Machu Picchu, a montanha que a Madrinha dos Mares subiu e onde, lá no alto, mascou folhas de coca e se achou um papagaio. A montanha tinha 10 patamares com 10 trilhos cada, e daí a grelha de 10×10. A água apagou quase todos os números e os cartógrafos só deixaram 32 coordenadas. A Madrinha dos Mares e os Piratas de Água Doce têm de desenhar a grelha, colocar esses números e completar o resto. A diagonal, lida da base ao cume, é a data marcada no topo do mapa. A última página do diário dos cartógrafos tem uma mensagem em código de César." },
 
         { tipo:"fala", textos:[
-          "Madrinha dos Mares, isto é o mapa de Machu Picchu. Reconheço o ar: altura a mais, oxigénio a menos, e alguém a mascar folhas de coca e a achar que era papagaio. Tu devias era estar aqui no barco, e não lá em cima a fazer de ave. Oito patamares, oito trilhos cada, e uma mensagem escrita em código de César. Chama os Piratas de Água Doce, abram o caderno e desenhem a grelha."
+          "Madrinha dos Mares, isto é o mapa de Machu Picchu. Reconheço o ar: altura a mais, oxigénio a menos, e alguém a mascar folhas de coca e a achar que era papagaio. Tu devias era estar aqui no barco, e não lá em cima a fazer de ave. Dez patamares, dez trilhos cada, e uma mensagem escrita em código de César. Chama os Piratas de Água Doce, abram o caderno e desenhem a grelha."
         ]},
 
         { tipo:"enfeites", simbolos:["trilho","montanha","folha"] },
 
         { tipo:"pista", id:"p01_16",
           selo:"Adivinha 14", sub:"O mapa dos cartógrafos",
-          enigma:"As dezassete coordenadas que a água não apagou:",
-          coordenadasTitulo:"Linha, coluna, número",
-          coordenadas:["L1 C6 = 7","L2 C1 = 0","L2 C5 = 3","L2 C6 = 1","L2 C7 = 4",
-                       "L3 C1 = 4","L4 C3 = 7","L4 C7 = 0","L4 C8 = 9","L5 C4 = 8",
-                       "L5 C7 = 9","L5 C8 = 1","L6 C2 = 3","L7 C4 = 7","L7 C5 = 1",
-                       "L8 C3 = 8","L8 C4 = 3"],
+          enigma:"Grelha de 10 por 10, com os algarismos de 0 a 9.\nCada algarismo aparece uma vez em cada linha e uma vez em cada coluna.",
+          coordenadasTitulo:"As 41 coordenadas que a água não apagou",
+          coordenadas:["L1 C2 = 3","L1 C3 = 2","L1 C4 = 6","L1 C9 = 9",
+                       "L2 C4 = 2","L2 C7 = 0","L2 C10 = 3",
+                       "L3 C3 = 8","L3 C4 = 3","L3 C8 = 4","L3 C10 = 7",
+                       "L4 C2 = 8","L4 C3 = 4","L4 C8 = 9","L4 C10 = 0",
+                       "L5 C4 = 1","L5 C5 = 9","L5 C6 = 0","L5 C8 = 3",
+                       "L6 C3 = 3","L6 C5 = 7","L6 C6 = 1","L6 C7 = 9","L6 C8 = 8",
+                       "L7 C4 = 0","L7 C7 = 2","L7 C9 = 7","L7 C10 = 1",
+                       "L8 C1 = 8","L8 C5 = 6","L8 C7 = 7","L8 C9 = 5",
+                       "L9 C1 = 6","L9 C4 = 5","L9 C7 = 1","L9 C8 = 2",
+                       "L10 C2 = 7","L10 C5 = 3","L10 C6 = 5","L10 C8 = 6","L10 C10 = 2"],
           codigo:"TXHP QDVFHX QHVWH GLD?",
           codigoLongo:true,
-          instrucao:"Os cartógrafos precisam do mapa completo. Preenche os números que sobraram e completa a grelha. Depois lê a diagonal, da base (canto inferior direito) ao cume (canto superior esquerdo). Esse é o código da montanha. Depois decifra a última mensagem dos cartógrafos, escrita em cifra de César com o número 3, e responde-lhe.",
+          instrucao:"Os cartógrafos precisam do mapa completo. Preenche os números que sobraram e completa a grelha. Depois lê a diagonal, da base (canto inferior direito) ao cume (canto superior esquerdo). Os primeiros oito algarismos são a data marcada no topo do mapa. Depois decifra a última mensagem dos cartógrafos, escrita em cifra de César com o número 3, e responde-lhe.",
           etiqueta:"A tua resposta", marcador:"Escreve aqui", botao:"Entregar o mapa",
           respostas:["sonia","madrinha dos mares"],
           destino:"01_17",
@@ -1481,7 +1487,8 @@ const JOGO = {
           ],
           instrucao:"As sereias guardam duas canções do Çparrow, as que ele mais ouvia no mp3 emprestado. Adivinha os dois títulos, por ordem.",
           etiqueta:"A tua resposta", marcador:"Os dois títulos", botao:"Cantar às sereias",
-          respostas:["upside down elephant gun","elephant gun upside down"],
+          respostas:["upside down elephant gun","elephant gun upside down",
+                     "upside down e elephant gun","elephant gun e upside down"],
           destino:"01_18",
           certo:{ emblema:"🏴‍☠️", tipo:"certo", quem:"Bacalhau",
                   texto:"«Upside Down» e «Elephant Gun»! Duas canções do mp3 da Sónia, e o Çparrow sabia as letras todas.",

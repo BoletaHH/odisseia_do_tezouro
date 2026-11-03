@@ -10,7 +10,7 @@ App de caça ao tesouro em níveis. PWA, pensada primeiro para iPhone. Funciona 
 | `manifest.webmanifest` | Nome, ícone e cores da app quando instalada. |
 | `sw.js` | Service worker mínimo. Não guarda nada; só torna a app instalável. |
 | `icons/` | Ícones do ecrã principal. |
-| `assets/` | Logo, papagaio, bilhetes, cartazes e os dois desenhos em vetor (baú e chave). |
+| `assets/` | Logo, papagaio, bilhetes, cartazes, fotos do camarote e os dois desenhos em vetor (baú e chave). |
 
 ## Pôr online no GitHub Pages
 
@@ -49,7 +49,7 @@ Editar `index.html` no GitHub (ícone do lápis) ou voltar a carregar o ficheiro
 | `01_13` | Ilha 11 — Poeta Preso · Adivinha 11 |
 | `01_14` | Ilha 12 — Pergaminho Secreto · Adivinha 12 |
 | `01_15` | Ilha 13 — Telemóvel Encalhado · Adivinha 13 |
-| `01_16` | Ilha 14 — Naufrágio dos Cartógrafos · Adivinha 14 |
+| `01_16` | Ilha 14 — Naufrágio dos Cartógrafos · Adivinha 14 (sudoku 10×10) |
 | `01_17` | Ilha 15 — Sereias Cantoras · Adivinha 15 |
 | `01_18` | A Última Adivinha · a palavra do cadeado |
 | `01_19` | O baú encontrado e a carta final |
@@ -99,13 +99,37 @@ Escrever `{nome}` em qualquer texto. A app troca pelo nome guardado.
 
 A validação ignora maiúsculas, acentos, espaços a mais e pontuação.
 
+## A Ilha 14 (01_16)
+
+Grelha de 10 por 10 com os algarismos de 0 a 9, cada um uma vez por linha e uma vez por coluna. Sem caixas. 41 coordenadas dadas, solução única, verificada por computador.
+
+A diagonal lê-se de L10C10 até L1C1 e dá 2302197867. Os primeiros oito algarismos são a data, 23021978. A cifra de César recuada 3 dá QUEM NASCEU NESTE DIA? e a resposta é "sonia".
+
+Solução completa:
+
+```
+       C1  C2  C3  C4  C5  C6  C7  C8  C9  C10
+ L1     7   3   2   6   0   4   8   1   9   5
+ L2     4   6   5   2   1   9   0   7   8   3
+ L3     9   1   8   3   2   6   5   4   0   7
+ L4     1   8   4   7   5   2   3   9   6   0
+ L5     2   5   7   1   9   0   6   3   4   8
+ L6     5   0   3   4   7   1   9   8   2   6
+ L7     3   9   6   0   4   8   2   5   7   1
+ L8     8   2   1   9   6   3   7   0   5   4
+ L9     6   4   0   5   8   7   1   2   3   9
+ L10    0   7   9   8   3   5   4   6   1   2
+```
+
 ## O que falta
 
-- **Ilha 5 (01_07):** as duas fotografias do camarote. Os botões "Foto 1" e "Foto 2" mostram avisos até lá.
-- **Ilha 14 (01_16):** a grelha 8×8 não tem solução única. Falta saber qual é o oitavo algarismo e a data que a diagonal deve dar, para gerar pistas que fechem.
-- **Ilha 15 (01_17):** as respostas não aceitam um "e" entre os dois títulos.
+- **Ilha 12 (01_14):** por verificar. Os símbolos da pedra não foram conferidos contra a tabela do caderno, porque a tabela só existe em papel. Confirmar que dizem mesmo uma pergunta cuja resposta é "correio".
+- **As pistas prometidas:** o Artigo 6 do Código de Piratas diz que há pistas para os complicados, mas a app não tem botão de dica nenhum. Ou se tira o artigo, ou se acrescenta o sistema.
+- **Ilha 5 (01_07):** as duas fotos funcionam, mas a câmara moveu-se entre os disparos e há dezenas de diferenças além da caneta. Convém repetir com o telemóvel apoiado em algo fixo.
 - O bloco do nome do jogador não está em nenhuma página, por isso o "Bem vindo de volta" nunca aparece.
+- O nível 0 não tem botão de saída no fim; sai-se pelo "Voltar" da barra.
 - O baú e a chave são desenhos em vetor, à espera de imagens no estilo das restantes, se quiseres.
+- Não existe nível 2.
 
 ## O que fica guardado no telemóvel
 
